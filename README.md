@@ -97,3 +97,87 @@ int main()
     exit(0);
 }
 ```
+
+## Operacje na plikach
+### Deskryptory standardowe
+Podstawowe deskryptory w systemach Unix/Linux:
+- `0` - standardowe wejście, odczyt od użytkownika (stdin)
+- `1` - standardowe wyjście, wyświetlanie dla użytkownika (stdout)
+- `2` - standardowy strumień błędów (stderr)
+
+### Otwieranie istniejącego pliku (open)
+Otwarcie pliku:
+
+`int fd = open("input.txt", O_RDONLY);`
+
+Flagi dostępu:
+- `O_RDONLY` - tylko do odczytu
+- `O_WRONLY` - tylko do zapisu
+- `O_RDWR` - odczyt i zapis
+- `O_APPEND` – operacje pisania odbywają się na końcu pliku. Użycie operatorem bitowym OR `|` w połączeniu z jednym z powyższych argumentów.
+
+Obsługa błędów (plik nie istnieje):
+```
+    if (fd == -1) {
+        perror("Błąd odczytu");
+        exit(1);
+    }
+```
+
+Zamknięcie pliku:
+
+`close(fd);`
+
+
+### Utworzenie nowego pliku (creat)
+Utworzenie pliku i otwarcie do zapisu:
+
+`fd = creat("output.txt", S_IRWXU);`
+
+Tryby dostępu (mode):
+- `S_IRWXU` - Uprawnienia odczytu, zapisu i wykonywania, dla właściciela pliku (rwx)
+- `S_IRUSR` - Prawo do odczytu dla właściciela pliku (r)
+- `S_IWUSR` - Prawo do zapisu dla właściciela pliku (w)
+- `S_IXUSR` - Prawo do wykonywania dla właściciela pliku (x)
+
+### Odczyt z pliku (read)
+Odczyt fragmentu pliku:
+```
+char buffer[1024];
+int readData = read(fd, buffer, 1024);
+```
+
+### Zapis do pliku (write)
+Zapis fragmentu pliku:
+```
+int fd2 = creat("output.txt", S_IRWXU);
+write(fd2, buffer, readData);
+```
+
+### Przykład - odczyt z pliku input.txt i zapis do pliku output.txt
+```
+#include <stdio.h> // printf
+#include <unistd.h> // getpid
+#include <stdlib.h> // exit
+#include <sys/wait.h> // wait
+#include <fcntl.h> // open
+
+int main()
+{
+    int fd1 = open("input.txt", O_RDONLY);
+    if (fd1 == -1) {
+        perror("Błąd odczytu");
+        exit(1);
+    }
+
+    char buffer[1024];
+    int readData = read(fd1, buffer, 1024);
+
+    int fd2 = creat("output.txt", S_IRWXU);
+    write(fd2, buffer, readData);
+    
+    close(fd1);
+    close(fd2);
+    exit(0);
+}
+```
