@@ -1,22 +1,16 @@
 # Systemy Operacyjne - Kolokwium Powtórzenie
 
 ## PODSTAWY
-Tworzenie pliku C
-
+### Tworzenie pliku C
 `touch file.c`
 
-
-Kompilowanie pliku C
-
+### Kompilowanie pliku C
 `gcc file.c`
 
-
-Uruchamianie skompilowanego pliku
-
+### Uruchamianie skompilowanego pliku
 `./a.out`
 
-
-Jakiś tam podstawowy programik
+### Jakiś tam podstawowy programik
 ```
 #include <stdio.h> // printf
 
@@ -28,12 +22,10 @@ int main()
 ```
 
 ## PROCESY (fork)
-Tworzenie procesu potomnego
-
+### Tworzenie procesu potomnego
 `int P1 = fork()`
 
-
-Program tworzący dwa procesy potomne
+### Program tworzący dwa procesy potomne
 ```
 #include <stdio.h> // printf
 #include <unistd.h> // getpid
@@ -61,20 +53,28 @@ int main()
     exit(0);
 }
 ```
+### Proces zombie
+Proces zombie to proces który został osierocony - proces macierzysty zakończył już działanie. Efekt wywołujemy za pomocą funkcji `sleep`.
 
+Przykład:
+```
+    if (P1 == 0)
+    {
+        printf("Proces potomny 1. PID: %d, PPID: %d\n", getpid(), getppid());
+        sleep(30);
+    }
+    exit(0);
+```
 
 ## Procesy i polecenia (execl)
-Wywoływanie programu podanego jako paramentr funkcji
-
+### Wywoływanie programu podanego jako paramentr funkcji
 `int execl ( char *path, char *arg0, ..., char *argn, char *null )`
 
-
-Przykład
-
+### Przykład
 `execl("/bin/ls", "ls", "-l", NULL)` - nie wiem czy NULL jest potrzebny, ale powinny być (CHYBA) 4 argumenty
 
 
-Program tworzący proces potomny i wywołujący w nim polecenie PWD
+### Program tworzący proces potomny i wywołujący w nim polecenie PWD
 
 ```
 #include <stdio.h> // printf
