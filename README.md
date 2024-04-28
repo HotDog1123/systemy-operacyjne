@@ -66,7 +66,7 @@ int main()
 ## Procesy i polecenia
 Wywoływanie programu podanego jako paramentr funkcji
 
-`int execlp( char *file, char *arg0, ..., char *argn, char *null )`
+`int execl ( char *path, char *arg0, ..., char *argn, char *null )`
 
 
 Przykład
