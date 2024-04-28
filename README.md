@@ -61,3 +61,38 @@ int main()
     exit(0);
 }
 ```
+
+
+## Procesy i polecenia
+Wywoływanie programu podanego jako paramentr funkcji
+
+`int execlp( char *file, char *arg0, ..., char *argn, char *null )`
+
+
+Przykład
+`execl("/bin/ls", "ls", "-l", NULL)` - nie wiem czy NULL jest potrzebny, ale powinny być (CHYBA) 4 argumenty
+
+
+Program tworzący proces potomny i wywołujący w nim polecenie PWD
+
+```
+#include <stdio.h> // printf
+#include <unistd.h> // getpid
+#include <stdlib.h> // exit
+#include <sys/wait.h> // wait
+
+int main()
+{
+    printf("Proces macierzysty, PID:%d\n", getpid());
+
+    int P1 = fork();
+    if (P1 == 0)
+    {
+        printf("Proces potomny 1. PID: %d, PPID: %d\n", getpid(), getppid());
+        execl("/bin/pwd", "pwd", NULL, NULL);
+        exit(0);
+    }
+    wait(NULL);
+    exit(0);
+}
+```
