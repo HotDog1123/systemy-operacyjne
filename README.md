@@ -70,6 +70,7 @@ Wywoływanie programu podanego jako paramentr funkcji
 
 
 Przykład
+
 `execl("/bin/ls", "ls", "-l", NULL)` - nie wiem czy NULL jest potrzebny, ale powinny być (CHYBA) 4 argumenty
 
 
