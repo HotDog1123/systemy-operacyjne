@@ -27,7 +27,7 @@ int main()
 
 ```
 
-## PROCESY (FORK)
+## PROCESY (fork)
 Tworzenie procesu potomnego
 
 `int P1 = fork()`
@@ -63,7 +63,7 @@ int main()
 ```
 
 
-## Procesy i polecenia
+## Procesy i polecenia (execl)
 Wywoływanie programu podanego jako paramentr funkcji
 
 `int execl ( char *path, char *arg0, ..., char *argn, char *null )`
