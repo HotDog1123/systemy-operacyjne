@@ -237,7 +237,7 @@ Argumenty funkcji:
 - `offset` - liczba bajtów, o jaką należy przesunąć wskaźnik
 - `whence` - parametr określający pozycję względem której jest przesuwany wskaźnik
     - `SEEK_SET` - początek pliku
-    - `SEEK_END' - koniec pliku
+    - `SEEK_END` - koniec pliku
     - `SEEK_CUR` - bieżąca pozycja
 
 
@@ -250,3 +250,4 @@ if (offset == -1) {
     return 1;
 }
 ```
+
