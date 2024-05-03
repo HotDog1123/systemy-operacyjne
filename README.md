@@ -210,7 +210,7 @@ int main()
 
 ### Przykład - odczyt z wejścia standardowego i zapis do pliku
 ```
-#include <stdio.h> // printf
+#include <stdio.h> // printf`
 #include <unistd.h> // getpid
 #include <stdlib.h> // exit
 #include <sys/wait.h> // wait
@@ -229,4 +229,24 @@ int main()
 }
 ```
 
+### Ustawianie wskaźnika pozycji
+`long lseek(inf fd, off_t offset, int whence)`
 
+Argumenty funkcji:
+- `fd` - deskryptor pliku, do którego mają zostać zapisane dane
+- `offset` - liczba bajtów, o jaką należy przesunąć wskaźnik
+- `whence` - parametr określający pozycję względem której jest przesuwany wskaźnik
+    - `SEEK_SET` - początek pliku
+    - `SEEK_END' - koniec pliku
+    - `SEEK_CUR` - bieżąca pozycja
+
+
+Przykład:
+```
+// Ustawianie wskaźnika pozycji na początku pliku
+offset = lseek(fd, 0, SEEK_SET);
+if (offset == -1) {
+    perror("Błąd podczas ustawiania wskaźnika pozycji");
+    return 1;
+}
+```
