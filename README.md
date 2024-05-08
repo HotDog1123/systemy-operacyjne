@@ -251,3 +251,77 @@ if (offset == -1) {
 }
 ```
 
+## Wątki
+### Funkcja wykonywana przez wątek
+```
+void *Hello (void *arg)
+{ 
+    int i;
+    for (i=0; i<20; i++)
+    { 
+	    printf("Wątek mówi cześć!\n"); 
+	    sleep(1);
+    }
+    return NULL; 
+}
+```
+### Tworzenie nowego wątku w funkcji main
+```
+    pthread_t mojwatek;
+
+    // Tworzenie wątku
+    if (pthread_create(&mojwatek, NULL, Hello, NULL))
+    {
+	    printf("Błąd przy tworzeniu wątku\n"); 
+	    abort(); 
+    }
+
+    // Oczekiwanie na zakończenie wątku
+    if (pthread_join (mojwatek, NULL ))
+    {
+	    printf("Błąd w kończeniu wątku\n");
+	    exit(0); 
+    }
+```
+
+### Przykład
+```
+#include <stdio.h> // printf
+#include <unistd.h> // getpid
+#include <stdlib.h> // exit
+#include <sys/wait.h> // wait
+#include <fcntl.h> // open
+#include <pthread.h> // pthread
+
+// Funkcja wykonywana przez wątek
+void *Hello (void *arg)
+{ 
+    int i;
+    for (i=0; i<20; i++)
+    { 
+	    printf("Wątek mówi cześć!\n"); 
+	    sleep(1);
+    }
+    return NULL; 
+}
+
+int main(void)
+{
+    pthread_t mojwatek;
+
+    // Tworzenie wątku
+    if (pthread_create(&mojwatek, NULL, Hello, NULL))
+    {
+	    printf("Błąd przy tworzeniu wątku\n"); 
+	    abort(); 
+    }
+
+    // Oczekiwanie na zakończenie wątku
+    if (pthread_join (mojwatek, NULL ))
+    {
+	    printf("Błąd w kończeniu wątku\n");
+	    exit(0); 
+    }
+    exit(0);
+}
+```
