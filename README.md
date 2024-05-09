@@ -175,7 +175,7 @@ int readData = read(fd, buffer, 1024);
 
 Obsługa błędów
 ```
-    if (bytes_read == -1) {
+    if (readData == -1) {
         perror("read");
         exit(EXIT_FAILURE);
     }
