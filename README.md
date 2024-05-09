@@ -187,6 +187,22 @@ Zapis fragmentu pliku:
 int fd2 = creat("output.txt", S_IRWXU);
 write(fd2, buffer, readData);
 ```
+Obsługa błędów
+```
+        if (write(1, buffer, readData) != readData) {
+            perror("write");
+            exit(EXIT_FAILURE);
+        }
+```
+
+### Duplikacja deskryptora
+```
+    fd2 = dup2(fd1, 10); // Nowy deskryptor pliku będzie 10
+    if (fd2 == -1) {
+        perror("Błąd podczas duplikowania deskryptora pliku");
+        return 1;
+    }
+```
 
 ### Przykład - odczyt z pliku input.txt i zapis do pliku output.txt
 ```
