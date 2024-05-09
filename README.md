@@ -143,9 +143,16 @@ Flagi dostępu:
     }
 ```
 
-Zamknięcie pliku:
-
+### Zamknięcie pliku:
 `close(fd);`
+
+Obsługa błędów
+```
+    if (close(fd) == -1) {
+        perror("close");
+        exit(EXIT_FAILURE);
+    }
+```
 
 
 ### Utworzenie nowego pliku (creat)
