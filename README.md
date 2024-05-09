@@ -135,7 +135,7 @@ Flagi dostępu:
 - `O_RDWR` - odczyt i zapis
 - `O_APPEND` – operacje pisania odbywają się na końcu pliku. Użycie operatorem bitowym OR `|` w połączeniu z jednym z powyższych argumentów.
 
-Obsługa błędów (plik nie istnieje):
+### Obsługa błędów (plik nie istnieje):
 ```
     if (fd == -1) {
         perror("Błąd odczytu");
