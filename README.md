@@ -173,6 +173,14 @@ char buffer[1024];
 int readData = read(fd, buffer, 1024);
 ```
 
+Obsługa błędów
+```
+    if (bytes_read == -1) {
+        perror("read");
+        exit(EXIT_FAILURE);
+    }
+```
+
 ### Zapis do pliku (write)
 Zapis fragmentu pliku:
 ```
