@@ -8,14 +8,24 @@ int main()
     printf("Proces macierzysty, PID:%d\n", getpid());
 
     int P1 = fork();
-    if (P1 == 0)
+    if (P1 < 0)
+    {
+        perror("Błąd podczas tworzenia procesu potomnego");
+        exit(1);
+    }
+    else if (P1 == 0)
     {
         printf("Proces potomny 1. PID: %d, PPID: %d\n", getpid(), getppid());
         exit(0);
     }
     wait(NULL);
     int P2 = fork();
-    if (P2 == 0)
+    if (P2 < 0)
+    {
+        perror("Błąd podczas tworzenia procesu potomnego");
+        exit(1);
+    }
+    else if (P2 == 0)
     {
         printf("Proces potomny 2. PID: %d, PPID: %d\n", getpid(), getppid());
         exit(0);
