@@ -10,7 +10,7 @@
 ### Uruchamianie skompilowanego pliku
 `./a.out`
 
-### Jakiś tam podstawowy programik
+### Hello world
 ```
 #include <stdio.h> // printf
 
